@@ -1,67 +1,75 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Carousel, Card, Button } from 'react-bootstrap';
-import './Home.css'; // Import custom CSS file
+import './Home.css';
+import women from '../assets/women.jpg'
+import kids from '../assets/kidss.avif'
+import men from '../assets/men.png'
+import img1 from '../assets/slide1.png'
 
 const Home = () => {
   return (
     <Container className="mt-5">
-      <Carousel className="mb-4">
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="./"
-            alt="First slide"
+      <Carousel className="mb-4" style={{ maxWidth: '800px', margin: '0 auto' }}>
+      <Carousel.Item>
+        <img
+          className="d-block w-100 mb-2"
+          src="https://via.placeholder.com/600x300/3498db/ffffff?text=Online+Shopping"
+          alt="First slide"
+          
           />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://img.freepik.com/premium-vector/online-shopping-logo-design-template-digital-shopping-logo-mouse-cursor-cart-concepts_502185-286.jpg?size=626&ext=jpg&ga=GA1.1.523418798.1710460800&semt=ais"
-            alt="Second slide"
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://via.placeholder.com/600x300/1abc9c/ffffff?text=Free+Delivery"
+          alt="Second slide"
           />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://png.pngtree.com/png-vector/20230228/ourmid/pngtree-80-off-coupon-with-codesqr-code-coupon-code-percentage-badge-vector-png-image_49888972.jpg"
-            alt="Third slide"
-          />
-        </Carousel.Item>
-      </Carousel>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://via.placeholder.com/600x300/e74c3c/ffffff?text=Coupon+Codes"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+    </Carousel>
       <div className="card-container">
         <Card>
-          <Card.Body>
-            <Card.Title>Card 1</Card.Title>
-            <Card.Text>
-              This is a card on the home page. Click the button to view products.
-            </Card.Text>
-            <Link to="/products">
-              <Button variant="primary">View Products</Button>
-            </Link>
-          </Card.Body>
+            <Card.Body>
+                <Card.Img src={men} className='mb-2'/>
+                <Card.Title>Men</Card.Title>
+                <Card.Text>
+                    Click to view Men products.
+                </Card.Text>
+                <Link to="/products">
+                    <Button variant="primary">View Products</Button>
+                </Link>
+            </Card.Body>
         </Card>
         <Card>
-          <Card.Body>
-            <Card.Title>Card 2</Card.Title>
-            <Card.Text>
-              This is another card on the home page. Click the button to view products.
-            </Card.Text>
-            <Link to="/products">
-              <Button variant="primary">View Products</Button>
-            </Link>
-          </Card.Body>
+            <Card.Body>
+                <Card.Img src={women} className='mb-2' /> 
+                <Card.Title>Womens</Card.Title>
+                <Card.Text>
+                    Click to view Womens products.
+                </Card.Text>
+                <Link to="/products">
+                    <Button variant="primary">View Products</Button>
+                </Link>
+            </Card.Body>
         </Card>
         <Card>
-          <Card.Body>
-            <Card.Title>Card 3</Card.Title>
-            <Card.Text>
-              This is the third card on the home page. Click the button to view products.
-            </Card.Text>
-            <Link to="/products">
-              <Button variant="primary">View Products</Button>
-            </Link>
-          </Card.Body>
+            <Card.Body>
+                <Card.Img src={kids} className='mb-2' style={{height: '220px' }}/> 
+                <Card.Title>kids</Card.Title>
+                <Card.Text>
+                    Click to view Kids products.
+                </Card.Text>
+                <Link to="/products">
+                    <Button variant="primary">View Products</Button>
+                </Link>
+            </Card.Body>
         </Card>
       </div>
     </Container>
