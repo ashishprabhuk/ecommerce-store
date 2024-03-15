@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Header from './components/Header'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from 'react-router-dom'
+import Home from './pages/Home'
+import SignUp from './pages/SignUp'
+import Login from './pages/Login'
+import Cart from './pages/Cart'
+import Products from './pages/Products';
 
 function App() {
 
@@ -13,8 +16,9 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<SignUp/>}/>
-        <Route path='/signup' element={<Login/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
         <Route path='/cart' element={<Cart/>}/>
       </Routes>
     </>
