@@ -18,10 +18,10 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="signup-container mt-3 mb-3"> 
-      <h2>Sign Up</h2>
+    <Container className="signup-container mt-3 mb-5"> {/* Added mb-5 class for bottom margin */}
+      <h2 className="text-center">Sign Up</h2>
       <Form onSubmit={handleSignup}>
-        <Form.Group controlId="formBasicFullName"  className='my-2'>
+        <Form.Group controlId="formBasicFullName" className='my-2'>
           <Form.Label>Full Name</Form.Label>
           <Form.Control
             type="text"
@@ -31,7 +31,7 @@ const SignUp = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicEmail"  className='my-2'>
+        <Form.Group controlId="formBasicEmail" className='my-2'>
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -41,7 +41,7 @@ const SignUp = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword"  className='my-2'>
+        <Form.Group controlId="formBasicPassword" className='my-2'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -51,7 +51,7 @@ const SignUp = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicConfirmPassword"  className='my-2'>
+        <Form.Group controlId="formBasicConfirmPassword" className='my-2'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -61,7 +61,7 @@ const SignUp = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className='mb-3'>
+        <Button variant="primary" type="submit" className='my-2'>
           Sign Up
         </Button>
       </Form>

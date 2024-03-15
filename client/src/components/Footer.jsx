@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar, Container } from 'react-bootstrap';
+import './Footer.css';
 
 const Footer = () => {
   const [showFooter, setShowFooter] = useState(false);
@@ -19,12 +20,12 @@ const Footer = () => {
   return (
     <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
       {showFooter && (
-        <Navbar bg="dark" variant="dark" className='p-1'>
+        <Navbar bg="dark" variant="dark" className='foot'>
           <Container>
-            <Navbar.Brand href="/">FakeStore</Navbar.Brand>
+            <Navbar.Brand href="/" className='logo'>FakeStore</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>
+              <Navbar.Text className='dev'>
                 Developed by <a href="https://ashishprabhuk.me/">Ashish Prabhu K</a>
               </Navbar.Text>
             </Navbar.Collapse>

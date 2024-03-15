@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaTrash } from "react-icons/fa";
 import { Container, ListGroup, Button } from 'react-bootstrap';
 import './Cart.css';
 
@@ -42,7 +43,7 @@ const Cart = () => {
               <Button variant="outline-secondary" onClick={() => decreaseQuantity(item.id)}>-</Button>
               <span>{item.quantity}</span>
               <Button variant="outline-secondary" onClick={() => increaseQuantity(item.id)}>+</Button>
-              <Button variant="danger" onClick={() => removeItem(item.id)}>Remove</Button>
+              <Button variant="danger" onClick={() => removeItem(item.id)}><FaTrash/></Button>
             </div>
           </ListGroup.Item>
         ))}

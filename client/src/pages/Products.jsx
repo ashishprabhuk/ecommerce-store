@@ -29,9 +29,9 @@ const Products = () => {
           <Card key={product.id} className="product-card">
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
+            <Card.Title>{product.title.length > 17 ? product.title.substring(0, 17) + '...' : product.title}</Card.Title>
               <Card.Text>${product.price}</Card.Text>
-              <Button variant="primary" onClick={() => addToCart(product.id)}>Add to Cart</Button>
+              <Button variant="dark" onClick={() => addToCart(product.id)}>Add to Cart</Button>
             </Card.Body>
           </Card>
         ))}
