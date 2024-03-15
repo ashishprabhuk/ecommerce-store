@@ -17,11 +17,11 @@ const Footer = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ position: 'fixed', bottom: 0, width: '100%' }}>
       {showFooter && (
-        <Navbar bg="dark" variant="dark" fixed="bottom">
+        <Navbar bg="dark" variant="dark" className='p-1'>
           <Container>
-            <Navbar.Brand href="#home">FakeStore</Navbar.Brand>
+            <Navbar.Brand href="/">FakeStore</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
@@ -31,7 +31,7 @@ const Footer = () => {
           </Container>
         </Navbar>
       )}
-    </>
+    </div>
   );
 };
 

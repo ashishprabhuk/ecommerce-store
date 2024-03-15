@@ -13,7 +13,7 @@ function Header() {
                 <Navbar.Brand href="/" style={{ fontSize: '24px' }}>FakeStore</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="m-auto">
+                    <Nav className="m-auto display-flex gap-2">
                         <Nav.Link href="/"><IoHome style={{ fontSize: '24px' }}/></Nav.Link>
                         <Nav.Link href="/products"><GiClothes style={{ fontSize: '24px' }}/></Nav.Link>
                         <Nav.Link href="/cart"><FaShoppingCart style={{ fontSize: '24px' }}/></Nav.Link>

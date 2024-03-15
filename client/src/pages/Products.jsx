@@ -22,7 +22,7 @@ const Products = () => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="my-5">
       <h2 className="text-center mb-4">Products</h2>
       <div className="products">
         {products.map(product => (

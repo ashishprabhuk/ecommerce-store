@@ -9,7 +9,7 @@ import img1 from '../assets/slide1.png'
 
 const Home = () => {
   return (
-    <Container className="mt-5">
+    <Container className="my-5">
       <Carousel className="mb-4" style={{ maxWidth: '800px', margin: '0 auto' }}>
       <Carousel.Item>
         <img
