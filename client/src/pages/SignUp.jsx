@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import './Signup.css'; // Import custom CSS file
+import './Signup.css';
 
 const SignUp = () => {
   const [fullName, setFullName] = useState('');
@@ -10,7 +10,6 @@ const SignUp = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    // Handle signup logic here (e.g., API call)
     console.log('Full Name:', fullName);
     console.log('Email:', email);
     console.log('Password:', password);
@@ -18,7 +17,7 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="signup-container mt-3 mb-5"> {/* Added mb-5 class for bottom margin */}
+    <Container className="signup-container mt-3 mb-5"> 
       <h2 className="text-center">Sign Up</h2>
       <Form onSubmit={handleSignup}>
         <Form.Group controlId="formBasicFullName" className='my-2'>

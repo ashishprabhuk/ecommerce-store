@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import './Login.css'; // Import custom CSS file
+import './Login.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');

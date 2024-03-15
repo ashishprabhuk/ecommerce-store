@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Card, Button } from 'react-bootstrap';
-import './Products.css'; // Import custom CSS file
+import './Products.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,6 @@ const Products = () => {
   }, []);
 
   const addToCart = (productId) => {
-    // Add your logic to handle adding the product to the cart
     console.log('Product added to cart:', productId);
   };
 
