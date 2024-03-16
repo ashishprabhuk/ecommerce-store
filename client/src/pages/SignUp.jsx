@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import './Signup.css';
@@ -17,7 +18,7 @@ const SignUp = () => {
   };
 
   return (
-    <Container className="signup-container mt-3 mb-5"> 
+    <Container className="signup-container mt-4 mb-5"> 
       <h2 className="text-center">Sign Up</h2>
       <Form onSubmit={handleSignup}>
         <Form.Group controlId="formBasicFullName" className='my-2'>

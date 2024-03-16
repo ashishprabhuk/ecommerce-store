@@ -1,56 +1,105 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { Container, ListGroup, Button } from 'react-bootstrap';
-import './Cart.css';
+import { Container, ListGroup, Button, Card } from "react-bootstrap";
+import "./Cart.css";
+import { Store } from "../ContextApi/context";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Product 1', price: 10, quantity: 1 },
-    { id: 2, name: 'Product 2', price: 20, quantity: 2 },
-  ]);
+  const { cart, setCart } = useContext(Store);
+  const [total, setTotal] = useState();
+  const [quantities, setQuantities] = useState({});
 
-  const increaseQuantity = (itemId) => {
-    setCartItems(cartItems.map(item =>
-      item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
-    ));
+  const increaseQuantity = (productId) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: (prevQuantities[productId] || 0) + 1,
+    }));
   };
 
-  const decreaseQuantity = (itemId) => {
-    setCartItems(cartItems.map(item =>
-      item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
-    ));
+  const decreaseQuantity = (productId) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0),
+    }));
   };
 
-  const removeItem = (itemId) => {
-    setCartItems(cartItems.filter(item => item.id !== itemId));
-  };
-
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
-  };
+  useEffect(() => {
+    let totalPrice = 0;
+    cart.forEach((product) => {
+      const quantity = quantities[product.id] || 1;
+      totalPrice += Number(product.price) * quantity;
+    });
+    setTotal(totalPrice.toFixed(2));
+  }, [cart, quantities]);
 
   return (
-    <Container className="mt-5">
-      <h2 className="text-center mb-4">Cart</h2>
-      <ListGroup>
-        {cartItems.map(item => (
-          <ListGroup.Item key={item.id} className="cart-item">
-            <div className="item-info">
-              <span>{item.name}</span>
-              <span>${item.price * item.quantity}</span>
-            </div>
-            <div className="quantity">
-              <Button variant="outline-secondary" onClick={() => decreaseQuantity(item.id)}>-</Button>
-              <span>{item.quantity}</span>
-              <Button variant="outline-secondary" onClick={() => increaseQuantity(item.id)}>+</Button>
-              <Button variant="danger" onClick={() => removeItem(item.id)}><FaTrash/></Button>
-            </div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-      <div className="total">
-        Total Price: ${calculateTotal()}
-      </div>
+    <Container className="my-5">
+      <h2 className="text-center mb-4">
+        {cart.length !== 0 ? "Cart - " + cart.length : ""}
+      </h2>
+      {cart.length !== 0 ? (
+        <>
+          <ListGroup>
+            {cart.map((product) => (
+              <ListGroup.Item key={product.id} className="cart-item">
+                <Card
+                  key={product.id}
+                  className="card-cart w-50 d-flex flex-row gap-3"
+                >
+                  <Card.Img
+                    variant="top"
+                    className="w-25"
+                    src={product.image}
+                  />
+                  <Card.Body>
+                    <Card.Title>{product.title}</Card.Title>
+                    <Card.Text>
+                      <strong>${product.price}</strong>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+
+                <div className="quantity">
+                  <Button
+                    className="d-flex justify-content-center align-items-center"
+                    style={{ textAlign: "center" }}
+                    variant="outline-secondary"
+                    onClick={() => decreaseQuantity(product.id)}
+                  >
+                    -
+                  </Button>
+                  <span className="px-2">{quantities[product.id] || 1}</span>
+                  <Button
+                    className="d-flex justify-content-center align-items-center"
+                    style={{ textAlign: "center" }}
+                    variant="outline-secondary"
+                    onClick={() => increaseQuantity(product.id)}
+                  >
+                    +
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() =>
+                      setCart(cart.filter((item) => item.id !== product.id))
+                    }
+                  >
+                    <FaTrash style={{ textAlign: "center" }} />
+                  </Button>
+                </div>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+          <div className="total">Total Price: ${total}</div>
+        </>
+      ) : (
+        <>
+          <h2 className="text-center">Cart is Empty</h2>
+          <Link to='/products' className="d-flex justify-content-center align-items-center mt-3">
+            <Button variant='dark'>Add Products</Button>
+          </Link>
+        </>
+      )}
     </Container>
   );
 };

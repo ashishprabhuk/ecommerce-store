@@ -1,36 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Container, Card, Button } from 'react-bootstrap';
-import './Products.css';
+import React, { useContext } from "react";
+import { Container, Card, Button, Alert } from "react-bootstrap";
+import "./Products.css";
+import { Store } from "../ContextApi/context";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/products')
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching products:', error);
-      });
-  }, []);
+  const { products, cart, setCart, showAlert } = useContext(Store);
 
   const addToCart = (productId) => {
-    console.log('Product added to cart:', productId);
+    setCart([...cart, products.find((product) => product.id === productId)]);
+    if(showAlert) alert("Added to Cart");
+  };
+
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((item) => item.id !== productId));
+    alert("Removed from Cart");
   };
 
   return (
     <Container className="my-5">
       <h2 className="text-center mb-4">Products</h2>
       <div className="products">
-        {products.map(product => (
+        {products.map((product) => (
           <Card key={product.id} className="product-card">
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
-            <Card.Title>{product.title.length > 17 ? product.title.substring(0, 17) + '...' : product.title}</Card.Title>
+              <Card.Title>
+                {product.title.length > 17
+                  ? product.title.substring(0, 17) + "..."
+                  : product.title}
+              </Card.Title>
               <Card.Text>${product.price}</Card.Text>
-              <Button variant="dark" onClick={() => addToCart(product.id)}>Add to Cart</Button>
+              {cart.includes(product) ? (
+                <Button
+                  variant="danger"
+                  onClick={() => removeFromCart(product.id)}
+                >
+                  Remove from Cart
+                </Button>
+              ) : (
+                <Button variant="dark" onClick={() => addToCart(product.id)}>
+                  Add to Cart
+                </Button>
+              )}
             </Card.Body>
           </Card>
         ))}

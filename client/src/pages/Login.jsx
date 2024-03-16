@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import './Login.css';
+import { Store } from '../ContextApi/context';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const { setIsLoggedIn, generateToken } = useContext(Store);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+    if (email.trim() && password.trim()) {
+      console.log('Email:', email);
+      console.log('Password:', password);
+      const token = generateToken();
+      setIsLoggedIn(true);
+      navigate('/');
+    } else {
+      alert('Please enter valid email and password');
+    }
   };
 
   return (
@@ -36,7 +47,7 @@ const LoginPage = () => {
           />
         </Form.Group>
 
-        <Button variant="dark" type="submit" className='my-3'>
+        <Button variant="primary" type="submit" className='my-3'>
           Login
         </Button>
       </Form>

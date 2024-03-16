@@ -1,30 +1,44 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes, Route} from 'react-router-dom'
-import Home from './pages/Home'
-import SignUp from './pages/SignUp'
-import Login from './pages/Login'
-import Cart from './pages/Cart'
-import Products from './pages/Products';
-import Footer from './components/Footer';
+import React, { useContext, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import Cart from "./pages/Cart";
+import Products from "./pages/Products";
+import { Store } from "./ContextApi/context";
 
 function App() {
+  const { tokenExists, isLoggedIn, setIsLoggedIn } = useContext(Store);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!tokenExists) {
+      navigate("/login");
+    }
+  }, [navigate, tokenExists]);
 
   return (
     <>
-      <Header/>
+      <Header />
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/products' element={<Products/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/cart' element={<Cart/>}/>
+        {isLoggedIn ? (
+          <>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<Cart />} />
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+          </>
+        )}
       </Routes>
-      <Footer/>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Carousel, Card, Button } from 'react-bootstrap';
+import { Container, Carousel, Card, Button, Image } from 'react-bootstrap';
 import './Home.css';
 import women from '../assets/women.jpg';
 import kids from '../assets/kidss.avif';
@@ -10,25 +10,26 @@ import img1 from '../assets/slide1.png';
 const Home = () => {
   return (
     <Container className="my-5">
-      <Carousel className="mb-4" style={{ maxWidth: '800px', margin: '0 auto' }}>
+      <Carousel className="mb-4" style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/600x300/3498db/ffffff?text=Online+Shopping"
+            
+            src="https://via.placeholder.com/600x300/7286D3/ffffff?text=50%+Discount"
             alt="First slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/600x300/1abc9c/ffffff?text=Free+Delivery"
+            src="https://via.placeholder.com/600x300/FF7878/ffffff?text=Free+Delivery"
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://via.placeholder.com/600x300/e74c3c/ffffff?text=Coupon+Codes"
+            src="https://via.placeholder.com/600x300/FFD966/ffffff?text=Free+Coupons"
             alt="Third slide"
           />
         </Carousel.Item>

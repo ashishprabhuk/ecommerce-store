@@ -2,7 +2,14 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .card-cart{
+    border: none !important;
+  }
   
+.--bs-card-border-width{
+  border: none;
+}
   .item-info {
     display: flex;
     align-items: center;
