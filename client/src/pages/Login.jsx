@@ -10,16 +10,28 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     if (email.trim() && password.trim()) {
-      console.log('Email:', email);
-      console.log('Password:', password);
-      const token = generateToken();
-      setIsLoggedIn(true);
-      navigate('/');
+      try {
+        console.log('Email:', email);
+        console.log('Password:', password);
+        
+        // const token = await generateToken();
+        
+        setIsLoggedIn(true);
+        // if (token) {
+        //   setIsLoggedIn(true);
+        //   navigate('/'); 
+        // } else {
+        //   alert('Invalid email or password. Please try again.');
+        // }
+      } catch (error) {
+        console.error('An error occurred:', error);
+        alert('An error occurred during login. Please try again later.');
+      }
     } else {
-      alert('Please enter valid email and password');
+      alert('Please enter a valid email and password');
     }
   };
 

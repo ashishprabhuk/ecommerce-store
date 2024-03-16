@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -10,14 +10,15 @@ import Products from "./pages/Products";
 import { Store } from "./ContextApi/context";
 
 function App() {
-  const { tokenExists, isLoggedIn, setIsLoggedIn } = useContext(Store);
+  const { tokenExists, isLoggedIn } = useContext(Store);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!tokenExists) {
+    if (!tokenExists && location.pathname !== '/login' && location.pathname !== '/signup') {
       navigate("/login");
     }
-  }, [navigate, tokenExists]);
+  }, [navigate, tokenExists, location.pathname]);
 
   return (
     <>

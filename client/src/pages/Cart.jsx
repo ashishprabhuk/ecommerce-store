@@ -95,7 +95,7 @@ const Cart = () => {
       ) : (
         <>
           <h2 className="text-center">Cart is Empty</h2>
-          <Link to='/products' className="d-flex justify-content-center align-items-center mt-3">
+          <Link to='/products' className="d-flex justify-content-center align-items-center text-decoration-none mt-3">
             <Button variant='dark'>Add Products</Button>
           </Link>
         </>

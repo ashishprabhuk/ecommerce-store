@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import './Signup.css';
@@ -11,10 +10,17 @@ const SignUp = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
     console.log('Full Name:', fullName);
     console.log('Email:', email);
     console.log('Password:', password);
     console.log('Confirm Password:', confirmPassword);
+
   };
 
   return (

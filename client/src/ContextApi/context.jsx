@@ -23,9 +23,8 @@ const Context = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    // setIsLoggedIn(!!token);
-    setIsLoggedIn(true);
-    setTokenExists(true);
+    setIsLoggedIn(!!token);
+    setTokenExists(!!token);
   }, []);
 
   useEffect(() => {
