@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import './Login.css'; // Use the same CSS file for styling as LoginPage
+import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {

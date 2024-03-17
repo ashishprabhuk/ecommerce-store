@@ -22,7 +22,7 @@ function Header() {
             className="text-decoration-none"
             style={{ color: "white" }}
           >
-            FakeStore
+            SoulStore
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

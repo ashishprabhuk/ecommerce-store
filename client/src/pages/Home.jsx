@@ -5,7 +5,6 @@ import './Home.css';
 import women from '../assets/women.jpg';
 import kids from '../assets/kidss.avif';
 import men from '../assets/men.png';
-import img1 from '../assets/slide1.png';
 
 const Home = () => {
   return (
