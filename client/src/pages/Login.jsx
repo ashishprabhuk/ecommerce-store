@@ -2,27 +2,24 @@ import React, { useContext, useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import './Login.css';
 import { Store } from '../ContextApi/context';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const { setIsLoggedIn, generateToken } = useContext(Store);
+  const { setIsLoggedIn } = useContext(Store);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     if (email.trim() && password.trim()) {
       try {
-        console.log('Email:', email);
-        console.log('Password:', password);
-        
-        // const token = await generateToken();
-        
+        navigate('/');
         setIsLoggedIn(true);
+        // const token = await generateToken();
         // if (token) {
         //   setIsLoggedIn(true);
-        //   navigate('/'); 
+        //   navigate('/');
         // } else {
         //   alert('Invalid email or password. Please try again.');
         // }
@@ -36,8 +33,8 @@ const LoginPage = () => {
   };
 
   return (
-    <Container className="login-container mt-5">
-      <h2>Login</h2>
+    <Container fluid className="login-container mt-4 mb-5" >
+      <h2 className="text-center">Login</h2>
       <Form onSubmit={handleLogin}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -49,7 +46,7 @@ const LoginPage = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword" className='my-3'>
+        <Form.Group controlId="formBasicPassword" className="my-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -59,7 +56,7 @@ const LoginPage = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className='my-3'>
+        <Button variant="primary" type="submit" className="my-2 w-100">
           Login
         </Button>
       </Form>

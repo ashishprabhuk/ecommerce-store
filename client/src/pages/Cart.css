@@ -1,6 +1,6 @@
 .cart-item {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
 
   .card-cart{
@@ -29,5 +29,10 @@
     font-weight: bold;
     text-align: right;
     margin-top: 20px;
+  }
+  
+  .cart-item-title {
+    word-wrap: break-word;
+    white-space: normal;
   }
   

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import { Container, ListGroup, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, ListGroup, Button, Card } from "react-bootstrap";
 import "./Cart.css";
 import { Store } from "../ContextApi/context";
 import { Link } from "react-router-dom";
@@ -43,50 +43,50 @@ const Cart = () => {
           <ListGroup>
             {cart.map((product) => (
               <ListGroup.Item key={product.id} className="cart-item">
-                <Card
-                  key={product.id}
-                  className="card-cart w-50 d-flex flex-row gap-3"
-                >
-                  <Card.Img
-                    variant="top"
-                    className="w-25"
-                    src={product.image}
-                  />
-                  <Card.Body>
-                    <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>
-                      <strong>${product.price}</strong>
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-
-                <div className="quantity">
-                  <Button
-                    className="d-flex justify-content-center align-items-center"
-                    style={{ textAlign: "center" }}
-                    variant="outline-secondary"
-                    onClick={() => decreaseQuantity(product.id)}
-                  >
-                    -
-                  </Button>
-                  <span className="px-2">{quantities[product.id] || 1}</span>
-                  <Button
-                    className="d-flex justify-content-center align-items-center"
-                    style={{ textAlign: "center" }}
-                    variant="outline-secondary"
-                    onClick={() => increaseQuantity(product.id)}
-                  >
-                    +
-                  </Button>
-                  <Button
-                    variant="danger"
-                    onClick={() =>
-                      setCart(cart.filter((item) => item.id !== product.id))
-                    }
-                  >
-                    <FaTrash style={{ textAlign: "center" }} />
-                  </Button>
-                </div>
+                <Row>
+                  <Col>
+                    <Card className="card-cart">
+                      <div className="cart-item-content d-flex align-items-center">
+                        <Card.Img
+                          className="cart-item-image"
+                          src={product.image}
+                        />
+                        <div className="cart-item-details px-2 flex-grow-1">
+                          <Card.Title className="cart-item-title">{product.title}</Card.Title>
+                          <Card.Text>
+                            <strong>${product.price}</strong>
+                          </Card.Text>
+                        </div>
+                      </div>
+                    </Card>
+                  </Col>
+                  <Col xs={12} md={4} className="d-flex align-items-center justify-content-center">
+                    <div className="quantity">
+                      <Button
+                        variant="outline-secondary"
+                        onClick={() => decreaseQuantity(product.id)}
+                      >
+                        -
+                      </Button>
+                      <span className="px-2">{quantities[product.id] || 1}</span>
+                      <Button
+                        variant="outline-secondary"
+                        onClick={() => increaseQuantity(product.id)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                    <Button
+                      variant="danger"
+                      className="mx-2"
+                      onClick={() =>
+                        setCart(cart.filter((item) => item.id !== product.id))
+                      }
+                    >
+                      <FaTrash />
+                    </Button>
+                  </Col>
+                </Row>
               </ListGroup.Item>
             ))}
           </ListGroup>
@@ -95,8 +95,11 @@ const Cart = () => {
       ) : (
         <>
           <h2 className="text-center">Cart is Empty</h2>
-          <Link to='/products' className="d-flex justify-content-center align-items-center text-decoration-none mt-3">
-            <Button variant='dark'>Add Products</Button>
+          <Link
+            to="/products"
+            className="d-flex justify-content-center mt-3 text-decoration-none"
+          >
+            <Button variant="dark" className="text-decoration-none">Add Products</Button>
           </Link>
         </>
       )}
