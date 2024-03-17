@@ -38,7 +38,6 @@ const Home = () => {
           <Card.Body>
             <Card.Img src={men} className="mb-2" style={{ height: "220px", objectFit: "cover" }} />
             <Card.Title>Men</Card.Title>
-            <Card.Text>Click to view Men products.</Card.Text>
             <Link to="/products">
               <Button variant="dark">View Products</Button>
             </Link>
@@ -48,7 +47,6 @@ const Home = () => {
           <Card.Body>
             <Card.Img src={women} className="mb-2" style={{ height: "220px", objectFit: "cover" }} />
             <Card.Title>Women</Card.Title>
-            <Card.Text>Click to view Women products.</Card.Text>
             <Link to="/products">
               <Button variant="dark">View Products</Button>
             </Link>
@@ -58,7 +56,6 @@ const Home = () => {
           <Card.Body>
             <Card.Img src={kids} className="mb-2" style={{ height: "220px", objectFit: "cover" }} />
             <Card.Title>Kids</Card.Title>
-            <Card.Text>Click to view Kids products.</Card.Text>
             <Link to="/products">
               <Button variant="dark">View Products</Button>
             </Link>
