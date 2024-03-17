@@ -56,25 +56,26 @@ import Products from "./pages/Products";
 import { Store } from "./ContextApi/context";
 
 function App() {
-  const { tokenExists, isLoggedIn } = useContext(Store);
-  const navigate = useNavigate();
-  const location = useLocation();
+  // const { tokenExists, isLoggedIn } = useContext(Store);
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
-  useEffect(() => {
-    if (
-      !tokenExists &&
-      location.pathname !== "/login" &&
-      location.pathname !== "/signup"
-    ) {
-      navigate("/login");
-    }
-  }, [navigate, tokenExists, location.pathname]);
+  // useEffect(() => {
+  //   if (
+  //     !tokenExists &&
+  //     location.pathname !== "/login" &&
+  //     location.pathname !== "/signup"
+  //   ) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate, tokenExists, location.pathname]);
 
   return (
     <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
