@@ -1,38 +1,46 @@
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
-import './Login.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import "./Signup.css";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(`http://localhost:5000/signup`, {
+        name,
+        email,
+        password,
+      });
+      if (response.status >= 200 && response.status < 300) {
+        navigate("/login");
+      } else {
+        console.log("Request failed with status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error signing up:", error);
     }
-    navigate('/login');
   };
 
   return (
-    <Container fluid className="login-container mt-4 mb-5"> {/* Use the same class for styling */}
-      <h2 className="text-center">Sign Up</h2>
-      <Form onSubmit={handleSignup}>
+    <>
+      <Container fluid className="login-container mt-4 mb-5">
+        {" "}
+        <h2 className="text-center">Sign Up</h2>
         <Form.Group controlId="formBasicFullName">
           <Form.Label>Full Name</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter full name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -42,7 +50,6 @@ const SignUp = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
-
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -52,22 +59,22 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-
-        <Form.Group controlId="formBasicConfirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </Form.Group>
-
-        <Button variant="primary" type="submit" className='my-3 w-100'> {/* Use the same styling class */}
+        <Button
+          variant="primary"
+          type="submit"
+          className="my-3 w-100"
+          onClick={() => {
+            handleSignUp();
+          }}
+        >
+          {" "}
           Sign Up
         </Button>
-      </Form>
-    </Container>
+      </Container>
+      <div className="loggedIn">
+        <Link to="/login">Already logged in? Login</Link>
+      </div>
+    </>
   );
 };
 

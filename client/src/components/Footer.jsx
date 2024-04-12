@@ -25,7 +25,7 @@ const Footer = () => {
         <Navbar bg="dark" variant="dark" className="foot">
           <Container>
             <Navbar.Brand className="logo">
-              <Link to="/" className="text-decoration-none" style={{color:"white"}}>FakeStore</Link>
+              <Link to="/" className="text-decoration-none" style={{color:"white"}}>SoulStore</Link>
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">

@@ -4,34 +4,41 @@ import { Container, Row, Col, ListGroup, Button, Card } from "react-bootstrap";
 import "./Cart.css";
 import { Store } from "../ContextApi/context";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Cart = () => {
-  const { cart, setCart } = useContext(Store);
+  const { cart, setCart, getCart } = useContext(Store);
   const [total, setTotal] = useState();
-  const [quantities, setQuantities] = useState({});
 
-  const increaseQuantity = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: (prevQuantities[productId] || 0) + 1,
-    }));
-  };
-
-  const decreaseQuantity = (productId) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0),
-    }));
-  };
+  useEffect(()=>{
+    getCart();
+  },[]);
 
   useEffect(() => {
-    let totalPrice = 0;
-    cart.forEach((product) => {
-      const quantity = quantities[product.id] || 1;
-      totalPrice += Number(product.price) * quantity;
-    });
-    setTotal(totalPrice.toFixed(2));
-  }, [cart, quantities]);
+    const cartTotal = cart.reduce((acc, item) => {
+      return acc + item.quantity * +(item.price)
+    }, 0);
+    setTotal(cartTotal);
+  }, [cart]);
+
+  const removeFromCart = async (id) => {
+    await axios.delete(`http://localhost:5000/api/addcart/${id}`);
+    getCart();
+  }
+
+  const increaseQuantity = (id) => {
+    const updatedCartItems = cart.map((item) =>
+      item._id === id ? { ...item, quantity: parseInt(item.quantity) + 1 } : item
+    );
+    setCart(updatedCartItems);
+  }
+
+  const decreaseQuantity = (id) => {
+    const updatedCartItems = cart.map((item) =>
+      item._id === id ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
+    );
+    setCart(updatedCartItems);
+  };
 
   return (
     <Container className="my-5">
@@ -42,7 +49,7 @@ const Cart = () => {
         <>
           <ListGroup>
             {cart.map((product) => (
-              <ListGroup.Item key={product.id} className="cart-item">
+              <ListGroup.Item key={product._id} className="cart-item">
                 <Row>
                   <Col>
                     <Card className="card-cart">
@@ -53,6 +60,7 @@ const Cart = () => {
                         />
                         <div className="cart-item-details px-2 flex-grow-1">
                           <Card.Title className="cart-item-title">{product.title}</Card.Title>
+                          <Card.Title className="cart-item-title">{product.company}</Card.Title>
                           <Card.Text>
                             <strong>${product.price}</strong>
                           </Card.Text>
@@ -64,24 +72,25 @@ const Cart = () => {
                     <div className="quantity">
                       <Button
                         variant="outline-secondary"
-                        onClick={() => decreaseQuantity(product.id)}
+                        onClick={() => decreaseQuantity(product._id)}
                       >
                         -
                       </Button>
-                      <span className="px-2">{quantities[product.id] || 1}</span>
+                      <span className="px-2">{Math.max(+(product.quantity) || 1, 1)}</span>
                       <Button
                         variant="outline-secondary"
-                        onClick={() => increaseQuantity(product.id)}
+                        onClick={() => increaseQuantity(product._id)}
                       >
                         +
                       </Button>
+
                     </div>
+                    <p className="cp-price text-dark mx-5 my-3">Rs: {product.quantity * +(product.price)}</p>
                     <Button
                       variant="danger"
                       className="mx-2"
                       onClick={() =>
-                        setCart(cart.filter((item) => item.id !== product.id))
-                      }
+                        removeFromCart(product._id) }
                     >
                       <FaTrash />
                     </Button>
@@ -96,7 +105,7 @@ const Cart = () => {
         <>
           <h2 className="text-center">Cart is Empty</h2>
           <Link
-            to="/products"
+            to="/home"
             className="d-flex justify-content-center mt-3 text-decoration-none"
           >
             <Button variant="dark" className="text-decoration-none">Add Products</Button>
