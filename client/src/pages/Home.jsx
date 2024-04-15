@@ -9,56 +9,6 @@ const Home = () => {
   const { cart, setCart, token } = useContext(Store);
   const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:5000/api/getproducts"
-  //       );
-  //       setProducts(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // const addToCart = async (id, image, title, company, price) => {
-  //   const headers = {
-  //     Authorization: `Bearer ${token}`,
-  //   };
-
-  //   const existingItem = cart.find((item) => item.id === id);
-  //   if (existingItem) {
-  //     alert("Item already exists in the cart");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:5000/api/addcart",
-  //       {
-  //         id,
-  //         image,
-  //         title,
-  //         company,
-  //         price,
-  //       },
-  //       {
-  //         headers,
-  //       }
-  //     );
-  //     if (response.data.itemExists) {
-  //       alert("Item already exists in the cart");
-  //     } else {
-  //       alert("Added to the cart");
-  //       setCart([...cart, { id, image, title, company, price }]);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error adding item to cart:", error);
-  //   }
-  // };
-
   const addToCart = useCallback(async (id, image, title, company, price) => {
     const headers = {
       Authorization: `Bearer ${token}`,
