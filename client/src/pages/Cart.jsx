@@ -26,20 +26,23 @@ const Cart = () => {
     getCart();
   }
 
-  const increaseQuantity = (id) => {
+  const updateCartItemQuantity = (id, operation) => {
     const updatedCartItems = cart.map((item) =>
-      item._id === id ? { ...item, quantity: parseInt(item.quantity) + 1 } : item
-    );
-    setCart(updatedCartItems);
-  }
-
-  const decreaseQuantity = (id) => {
-    const updatedCartItems = cart.map((item) =>
-      item._id === id ? { ...item, quantity: Math.max(item.quantity - 1, 1) } : item
+      item._id === id
+        ? {
+            ...item,
+            quantity: Math.max(
+              operation === "increase"
+                ? parseInt(item.quantity) + 1
+                : parseInt(item.quantity) - 1,
+              1
+            ),
+          }
+        : item
     );
     setCart(updatedCartItems);
   };
-
+  
   return (
     <Container className="my-5">
       <h2 className="text-center mb-4">
@@ -72,14 +75,14 @@ const Cart = () => {
                     <div className="quantity">
                       <Button
                         variant="outline-secondary"
-                        onClick={() => decreaseQuantity(product._id)}
+                        onClick={() => updateCartItemQuantity(product._id, "decrease")}
                       >
                         -
                       </Button>
                       <span className="px-2">{Math.max(+(product.quantity) || 1, 1)}</span>
                       <Button
                         variant="outline-secondary"
-                        onClick={() => increaseQuantity(product._id)}
+                        onClick={() => updateCartItemQuantity(product._id, "increase")}
                       >
                         +
                       </Button>
